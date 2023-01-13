@@ -1,20 +1,42 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import { UserAuth } from '../../ContexAPI/AuthProvider';
 
 const Login = () => {
 
-
+   const{loging,goolgeLogin} = useContext(UserAuth);
+   
 
     const { register, handleSubmit, formState: { errors }, reset } = useForm()
+   
 
+    // login with Email and Password event handler
     const submitedLoginForm = (data) => {
-        console.log(data)
+        // console.log(data)
+        const email = data.email;
+        const password = data.password
+        loging(email,password)
+        .then(data=>{
+            const user = data.user
+            console.log(user);
+        }).catch(error=>{
+            toast.error(error.message.slice(22,36))
+        })
     }
 
+
+   // google login event handler
     const handleGoolgeLogin = () => {
-        console.log("handle Google login clicked");
+        goolgeLogin()
+        .then(()=>{})
+        .catch(err=>{
+            toast.error(err.message.slice(22,36))
+        })
     }
+
+
     return (
         <div className="hero min-h-screen bg-base-200">
             <div className="hero-content w-full">

@@ -1,8 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import { UserAuth } from '../../ContexAPI/AuthProvider';
 
 const Navbar = () => {
-  
+    const{logout,user} = useContext(UserAuth)
+    const handleLoagout=()=>{
+        logout()
+        .then(()=>{
+            toast.success("successfully logout")
+        }).catch(err=>{
+            console.log(err);
+        })
+    }
+    console.log(user)
     const menuList = <>
      <li><Link to="/">Home</Link></li>
      <li><Link to="/">Add Blog</Link></li>
@@ -30,6 +41,7 @@ const Navbar = () => {
         </div>
         <div className="navbar-end">
           <Link to="/login" className="btn">Login</Link>
+          <button onClick={handleLoagout} className="btn">Logout</button>
         </div>
       </div>    
     );
