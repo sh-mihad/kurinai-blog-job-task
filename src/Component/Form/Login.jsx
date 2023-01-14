@@ -1,13 +1,15 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { UserAuth } from '../../ContexAPI/AuthProvider';
 
 const Login = () => {
 
    const{loging,goolgeLogin} = useContext(UserAuth);
-   
+   const navigate = useNavigate()
+   const location = useLocation()
+   const from = location.state?.from?.pathname || "/";
 
     const { register, handleSubmit, formState: { errors }, reset } = useForm()
    
@@ -20,7 +22,8 @@ const Login = () => {
         loging(email,password)
         .then(data=>{
             const user = data.user
-            console.log(user);
+            // console.log(user);
+            navigate(from, { replace:true});
         }).catch(error=>{
             toast.error(error.message.slice(22,36))
         })

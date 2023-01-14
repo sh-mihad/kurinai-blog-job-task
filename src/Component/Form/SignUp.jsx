@@ -1,12 +1,13 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { UserAuth } from '../../ContexAPI/AuthProvider';
 
 const SignUp = () => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm()
     const { createUserAccoutn, goolgeLogin, updateName } = useContext(UserAuth)
+    const navigte = useNavigate()
     const submitedLoginForm = (data) => {
         // console.log(data)
         const name = data.name;
@@ -29,7 +30,9 @@ const SignUp = () => {
                     .then(data=>{
                         const user = data.user
                        updateName(name,image)
-                       .then(()=>{})
+                       .then(()=>{
+                        navigte("/")
+                       })
                        .catch(err=>{
                         toast.error(err.message)
                        })

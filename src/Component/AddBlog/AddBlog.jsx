@@ -1,12 +1,14 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import { UserAuth } from '../../ContexAPI/AuthProvider';
 
 const AddBlog = () => {
     const {user}= useContext(UserAuth)
     const {register,handleSubmit,formState: { errors },reset} = useForm()
-    console.log(user);
+    // console.log(user);
+    const navigate = useNavigate()
 
     const submitedLoginForm =data=>{
         const email = user?.email
@@ -34,7 +36,7 @@ const AddBlog = () => {
                     email
                 }
 
-            fetch("http://localhost:5000/blog",{
+            fetch("https://kurenai-server.vercel.app/blog",{
                 method:"POST",
                 headers: {
                     'Content-Type': 'application/json'
@@ -46,6 +48,7 @@ const AddBlog = () => {
                 console.log(data)
                if(data.acknowledged){
                 toast.success("Successfully Added")
+                navigate("/")
                }
             })
 

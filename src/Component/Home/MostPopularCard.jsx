@@ -1,12 +1,13 @@
 import React from 'react';
 
-const MostPopularCard = () => {
+const MostPopularCard = ({blog}) => {
+    
     return (
-       <div className='mx-10 my-10'>
-        <img src="https://placeimg.com/400/225/arch" className='w-full' alt="" />
+       <div className='border border-gray-300 pb-8 px-3 pt-3 hover:shadow-2xl '>
+        <img src={blog?.image} className='mx-auto' alt="" />
        <div className='mt-4'>
-       <p>Blog Category</p>
-        <h1 className='text-2xl'>Blog title shuld be here</h1>
+       <p>{blog?.category}</p>
+        <h1 className='text-xl'>{blog?.tille}</h1>
        </div>
        
 
