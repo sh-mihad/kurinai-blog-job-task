@@ -1,9 +1,13 @@
 import React from 'react';
+import Header from '../Header/Header';
+import MostPopuler from './MostPopuler';
+
 
 const Home = () => {
     return (
         <div>
-            this is home page
+         <Header/>
+         <MostPopuler/>
         </div>
     );
 };
